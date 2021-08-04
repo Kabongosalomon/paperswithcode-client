@@ -522,7 +522,7 @@ class PapersWithCodeClient:
         )
 
     @handler
-    def task_evaluation_list(self, task_id: str, page: int = 1, items_per_page : int = 10) -> EvaluationTables:
+    def task_evaluation_list(self, task_id: str, page: int = 1, items_per_page : int = 10, timeout : int = 140) -> EvaluationTables:
         """Return a list of evaluation tables for a selected task.
 
         Args:
@@ -534,7 +534,7 @@ class PapersWithCodeClient:
         params = self.__params(page, items_per_page)
 
         return self.__page(
-            self.http.get(f"/tasks/{task_id}/evaluations/", params=params), EvaluationTables
+            self.http.get(f"/tasks/{task_id}/evaluations/", params=params, timeout=timeout), EvaluationTables
         )
 
     @handler
@@ -851,7 +851,7 @@ class PapersWithCodeClient:
         self.http.delete(f"/evaluations/{evaluation_id}/metrics/{metric_id}/")
 
     @handler
-    def evaluation_result_list(self, evaluation_id: str, page: int = 1, items_per_page : int = 10) -> Results:
+    def evaluation_result_list(self, evaluation_id: str, page: int = 1, items_per_page : int = 10, timeout : int = 140) -> Results:
         """List all results from the evaluation table.
 
         Args:
@@ -863,7 +863,7 @@ class PapersWithCodeClient:
         params = self.__params(page, items_per_page)
 
         return self.__page(
-            self.http.get(f"/evaluations/{evaluation_id}/results/", params=params), Results
+            self.http.get(f"/evaluations/{evaluation_id}/results/", params=params, timeout=timeout), Results
         )
 
     @handler
