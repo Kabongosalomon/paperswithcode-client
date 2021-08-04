@@ -851,7 +851,7 @@ class PapersWithCodeClient:
         self.http.delete(f"/evaluations/{evaluation_id}/metrics/{metric_id}/")
 
     @handler
-    def evaluation_result_list(self, evaluation_id: str) -> Results:
+    def evaluation_result_list(self, evaluation_id: str, page: int = 1, items_per_page : int = 10) -> Results:
         """List all results from the evaluation table.
 
         Args:
@@ -860,8 +860,10 @@ class PapersWithCodeClient:
         Returns:
             Results: Results object.
         """
+        params = self.__params(page, items_per_page)
+
         return self.__page(
-            self.http.get(f"/evaluations/{evaluation_id}/results/"), Results
+            self.http.get(f"/evaluations/{evaluation_id}/results/", params=params), Results
         )
 
     @handler
