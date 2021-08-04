@@ -522,7 +522,7 @@ class PapersWithCodeClient:
         )
 
     @handler
-    def task_evaluation_list(self, task_id: str) -> EvaluationTables:
+    def task_evaluation_list(self, task_id: str, page: int = 1) -> EvaluationTables:
         """Return a list of evaluation tables for a selected task.
 
         Args:
@@ -531,8 +531,10 @@ class PapersWithCodeClient:
         Returns:
             EvaluationTables: EvaluationTables object.
         """
+        params = self.__params(page, items_per_page)
+
         return self.__page(
-            self.http.get(f"/tasks/{task_id}/evaluations/"), EvaluationTables
+            self.http.get(f"/tasks/{task_id}/evaluations/", params=params), EvaluationTables
         )
 
     @handler
