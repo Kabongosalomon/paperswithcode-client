@@ -522,7 +522,7 @@ class PapersWithCodeClient:
         )
 
     @handler
-    def task_evaluation_list(self, task_id: str, page: int = 1) -> EvaluationTables:
+    def task_evaluation_list(self, task_id: str, page: int = 1, items_per_page : int = 10) -> EvaluationTables:
         """Return a list of evaluation tables for a selected task.
 
         Args:
